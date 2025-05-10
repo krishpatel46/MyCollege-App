@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".manageDbFragments.UpdateProfessorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/greetingsTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:textAlignment="center"
+                android:text="Edit Details"
+                android:textColor="@color/green"
+                android:textSize="@dimen/_22ssp"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:background="@color/dark_blue"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/profEmailTxt"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/unfilled_btn2"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="Email"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/profNameTxt"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/input_field"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/selectBranch_header"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:text="Select Branch"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal" />
+
+        <Spinner
+            android:id="@+id/branchSpinner"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:id="@+id/profBranchTxt"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="Branch"
+            android:textAllCaps="false"
+            android:textColor="#4A4343"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal"
+            android:paddingStart="4dp"
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/selectDept_header"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:text="Select Department"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal" />
+
+        <Spinner
+            android:id="@+id/deptSpinner"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:id="@+id/profDeptTxt"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="Department"
+            android:textAllCaps="false"
+            android:textColor="#4A4343"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal"
+            android:paddingStart="4dp"
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/selectDesignation_header"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:text="Select Designation"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal" />
+
+        <Spinner
+            android:id="@+id/designationSpinner"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:id="@+id/profDesignationTxt"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="Designation"
+            android:textAllCaps="false"
+            android:textColor="#4A4343"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal"
+            android:paddingStart="4dp"
+            android:paddingBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/selectSemester_header"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:text="Select Semester"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal"
+            android:visibility="invisible"/>
+
+        <Spinner
+            android:id="@+id/semesterSpinner"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/profSemTxt"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:text="Semester"
+            android:textAllCaps="false"
+            android:textColor="#4A4343"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal"
+            android:paddingStart="4dp"
+            android:paddingBottom="4dp"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/errorTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="***"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/submitBtn"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_38sdp"
+                android:background="@drawable/filled_btn2"
+                android:text="@string/submit"
+                android:textAllCaps="false"
+                android:textColor="@color/green"
+                android:textSize="@dimen/_14ssp" />
+
+            <android.widget.Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:background="@drawable/unfilled_btn2"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/dark_blue"
+                android:textSize="@dimen/_14ssp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

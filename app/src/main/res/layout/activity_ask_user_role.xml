@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AskUserRoleActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/college_ani"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_180sdp"
+            android:contentDescription="@string/page_image"
+            android:layout_marginTop="@dimen/_40sdp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/college" />
+
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:text="@string/are_you_a_college"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
+
+        <android.widget.Button
+            android:id="@+id/register_btn"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/filled_btn"
+            android:text="@string/register_with_us"
+            android:textColor="@color/white" />
+
+        <android.widget.Button
+            android:id="@+id/adminLogin_btn"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@drawable/unfilled_btn"
+            android:text="@string/login_as_admin"
+            android:textColor="@color/green" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_38sdp">
+
+            <!--TextView
+                android:id="@+id/txt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/already_registered"
+                android:textColor="@color/dark_blue"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                android:textAlignment="textEnd"
+                android:layout_weight="50" -->
+
+            <!--TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="   "-->
+
+            <TextView
+                android:id="@+id/txt3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_your_role"
+                android:textColor="@color/dark_blue"
+                android:textSize="@dimen/_14ssp"
+                android:textAlignment="center"
+                android:layout_weight="50" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/student_btn"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/unfilled_btn"
+            android:text="@string/student"
+            android:textColor="@color/green" />
+
+        <Button
+            android:id="@+id/prof_btn"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/unfilled_btn"
+            android:text="@string/professor"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+</ScrollView>

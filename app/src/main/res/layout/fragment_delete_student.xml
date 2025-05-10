@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".manageDbFragments.DeleteStudentFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/enrollNo_header"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Enrollment No."
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="10dp"/>
+            <TextView
+                android:id="@+id/stuEnrollNoTxt"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/unfilled_btn2"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Enrollment No."
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/name_header"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Name"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="10dp"/>
+            <TextView
+                android:id="@+id/stuNameTxt"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/unfilled_btn2"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Name"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/email_header"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Email"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="10dp"/>
+            <TextView
+                android:id="@+id/stuEmailTxt"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/unfilled_btn2"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Email"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+
+            <TextView
+                android:id="@+id/branch_header"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Branch"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="10dp"/>
+            <TextView
+                android:id="@+id/stuBranchTxt"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/unfilled_btn2"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Branch"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+
+            <TextView
+                android:id="@+id/course_header"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Course"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="10dp"/>
+            <TextView
+                android:id="@+id/stuCourseTxt"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/unfilled_btn2"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Course"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/sem_header"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Semester"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="10dp"/>
+            <TextView
+                android:id="@+id/stuSemTxt"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/unfilled_btn2"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="Semester"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="normal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/errorTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="***"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="@dimen/_12ssp"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/submitBtn"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_38sdp"
+                    android:background="@drawable/filled_btn2"
+                    android:text="Delete"
+                    android:textAllCaps="false"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/_14ssp" />
+
+                <android.widget.Button
+                    android:id="@+id/cancelBtn"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_38sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:background="@drawable/unfilled_btn2"
+                    android:text="@string/cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

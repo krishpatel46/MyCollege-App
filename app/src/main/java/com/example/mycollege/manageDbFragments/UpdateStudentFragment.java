@@ -1,0 +1,334 @@
+package com.example.mycollege.manageDbFragments;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.mycollege.activities.ManageDbAdminActivity;
+import com.example.mycollege.classes.Constant;
+import com.example.mycollege.classes.ManagePreferences;
+import com.example.mycollege.databinding.FragmentUpdateStudentBinding;
+import com.example.mycollege.objects.Student;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+
+/********************************************************************************************
+
+ unused fragment - code shifted to a corresponding activity
+
+********************************************************************************************/
+
+public class UpdateStudentFragment extends Fragment {
+
+    private FragmentUpdateStudentBinding binding;
+
+    Spinner branchSpinner, courseSpinner;
+    ArrayAdapter<String> branchAdapter, courseAdapter;
+
+    private ManagePreferences preferences;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference colRef = db.collection(Constant.KEY_DB_ROOT_COL);
+    private DocumentReference docRef;
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        binding = FragmentUpdateStudentBinding.inflate(inflater, container, false);
+
+        preferences = new ManagePreferences(requireActivity(), Constant.KEY_ADMIN_PREFERENCE_NAME);
+        String collegeName = preferences.getString(Constant.KEY_ADMIN_COLLEGE_NAME);
+
+        Bundle stuData = getArguments();
+        if (stuData != null && !stuData.isEmpty()) {
+            binding.stuEnrollNoTxt.setText("Enrolment No.: " + stuData.getString("stuEnrollNo"));
+            binding.stuNameTxt.setText(stuData.getString("stuName"));
+            binding.stuEmailTxt.setText(stuData.getString("stuEmail"));
+
+            binding.stuBranchTxt.setText("Old Branch: " + stuData.getString("stuBranch"));
+            binding.stuCourseTxt.setText("Old Course: " + stuData.getString("stuCourse"));
+            binding.stuSemTxt.setText("Old Semester: " + stuData.getString("stuSem"));
+        }
+
+
+        //  ...set spinners...
+        branchSpinner = binding.branchSpinner;
+        courseSpinner = binding.courseSpinner;
+
+        colRef.whereEqualTo("Name", collegeName)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(error != null) {
+                            setErrorTxt(error.getMessage());
+                        }
+                        else {
+                            for(DocumentSnapshot docSnap: value) {
+                                String collegeID = docSnap.getId();
+                                binding.branchSpinner.setAdapter(setBranchSpinner(colRef, collegeID));
+                            }
+                        }
+                    }
+                });
+
+        branchSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String branchName = branchSpinner.getSelectedItem().toString();
+
+                Log.d("col path", colRef.getPath());
+                colRef.whereEqualTo("Name", collegeName)
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if(error != null) {
+                                    setErrorTxt(error.getMessage());
+                                }
+                                else {
+                                    for(DocumentSnapshot docSnap: value) {
+                                        String collegeID = docSnap.getId();
+                                        binding.courseSpinner.setAdapter(setCourseSpinner(colRef, collegeID, branchName));
+                                    }
+                                }
+                            }
+                        });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String branchName = branchSpinner.getSelectedItem().toString();
+                String courseName = courseSpinner.getSelectedItem().toString();
+
+                Log.d("col path 2", colRef.getPath());
+                colRef.whereEqualTo("Name", collegeName)
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if(error != null) {
+                                    setErrorTxt(error.getMessage());
+                                }
+                                else {
+                                    for(DocumentSnapshot docSnap: value) {
+                                        String collegeID = docSnap.getId();
+                                        binding.semesterSpinner.setAdapter(getSemNumber(colRef, collegeID, branchName, courseName));
+                                    }
+                                }
+                            }
+                        });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        //  ...set listeners...
+        setListeners(collegeName, stuData);
+
+        return binding.getRoot();
+    }
+
+    private ArrayAdapter<String> setBranchSpinner(CollectionReference colRef_fun, String collegeID) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_spinner_dropdown_item, arrayList);
+
+        colRef_fun.document(collegeID)
+                .collection(Constant.KEY_DB_BRANCH_COL)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(error != null) {
+                            setErrorTxt(error.getMessage());
+                        }
+                        else {
+                            arrayList.clear();
+
+                            assert value != null;
+                            for(DocumentSnapshot docSnap:value) {
+                                String branchName = docSnap.getString(Constant.KEY_BRANCH_NAME);
+                                arrayList.add(branchName);
+                            }
+
+                            arrayAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+        return arrayAdapter;
+    }
+
+    private ArrayAdapter<String> setCourseSpinner(CollectionReference colRef_fun, String collegeID, String branchName) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_spinner_dropdown_item, arrayList);
+
+        colRef_fun.document(collegeID)
+                .collection(Constant.KEY_DB_BRANCH_COL).document(branchName)
+                .collection(Constant.KEY_DB_COURSE_COL)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(error != null) {
+                            setErrorTxt(error.getMessage());
+                        }
+                        else {
+                            arrayList.clear();
+
+                            assert value != null;
+                            for(DocumentSnapshot docSnap:value) {
+                                String courseName = docSnap.getString(Constant.KEY_COURSE_NAME);
+                                arrayList.add(courseName);
+                            }
+
+                            Log.d("course list", arrayList.toString());
+                            arrayAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+
+//        binding.courseSpinner.setAdapter(arrayAdapter);
+        return arrayAdapter;
+    }
+
+
+    private ArrayAdapter<String> getSemNumber(CollectionReference colRef_fun, String collegeID, String branchName, String courseName) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_spinner_dropdown_item, arrayList);
+
+
+        colRef_fun.document(collegeID)
+                .collection(Constant.KEY_DB_BRANCH_COL).document(branchName)
+                .collection(Constant.KEY_DB_COURSE_COL).document(courseName)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        arrayList.clear();
+
+                        try {
+                            int semNo = documentSnapshot.getLong(Constant.KEY_SEM_NUM).intValue();
+
+                            for (int sem = semNo; sem > 0; sem--) {
+                                arrayList.add(String.valueOf(sem));
+                            }
+
+                            arrayAdapter.notifyDataSetChanged();
+
+                        } catch (NullPointerException npe) {
+                            setErrorTxt("*Please select appropriate course");
+                        } catch (NumberFormatException nfe) {
+                            setErrorTxt("*Please select a course");
+                        }
+                    }
+                });
+
+        return arrayAdapter;
+    }
+
+    private void setListeners(String collegeName, Bundle stuData) {
+        binding.submitBtn.setOnClickListener(view -> {
+            String name = binding.stuNameTxt.getText().toString();
+            String enrolNo = stuData.getString("stuEnrollNo");
+            String email = binding.stuEmailTxt.getText().toString().trim();
+            String branch = binding.branchSpinner.getSelectedItem().toString();
+            String course = binding.courseSpinner.getSelectedItem().toString();
+            String sem = binding.semesterSpinner.getSelectedItem().toString();
+            String pass = stuData.getString("stuPass");
+
+            Student studentData = new Student(name, enrolNo, email, pass, collegeName, branch, course, sem);
+
+            colRef.whereEqualTo("Name", collegeName)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                            if (error != null) {
+                                setErrorTxt(error.getMessage());
+                            } else {
+                                for (DocumentSnapshot docSnap : value) {
+                                    String collegeID = docSnap.getId();
+                                    updateStudent(collegeID, enrolNo, studentData);
+                                }
+                            }
+                        }
+                    });
+        });
+
+
+        binding.cancelBtn.setOnClickListener(view -> {
+            startActivity(new Intent(requireActivity(), ManageDbAdminActivity.class));
+            requireActivity().finish();
+        });
+    }
+
+    private void updateStudent(String collegeID, String enrolNo, Student studentData) {
+        try {
+            colRef.document(collegeID)
+                    .collection(Constant.KEY_DB_STUDENT_COL)
+                    .document(enrolNo)
+                    .set(studentData)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(requireContext(), "Student details updated", Toast.LENGTH_SHORT).show();
+                            removeFragment(UpdateStudentFragment.this);
+                        }
+                    });
+        }
+        catch (NullPointerException npe) {
+            Toast.makeText(requireContext(), "Oops, details not available", Toast.LENGTH_LONG).show();
+            removeFragment(UpdateStudentFragment.this);
+        }
+    }
+
+
+    //  ...method to set error textView...
+    private void setErrorTxt(String message) {
+        binding.errorTxt.setVisibility(View.VISIBLE);
+        binding.errorTxt.setText(message);
+    }
+
+    private void removeFragment(Fragment fragment) {
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+        if(isAdded()) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(fragment);
+            fragmentTransaction.detach(fragment);
+
+            fragmentTransaction.commit();
+
+            fragmentManager.popBackStack();
+        }
+    }
+}
